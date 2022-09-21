@@ -27,6 +27,14 @@ pipeline {
 				deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://192.168.5.135:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
 			}
 		}
+		stage ('API Test') {
+			steps {
+				dir('api-test') {
+					git credentialsId: 'RepoPandora', url: 'https://github.com/pandorafighter/tasks-api-test'
+					bat 'mvn test'
+				}
+			}
+		}
 	}
 }
 
