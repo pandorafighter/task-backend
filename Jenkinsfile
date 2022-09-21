@@ -35,6 +35,14 @@ pipeline {
 				}
 			}
 		}
+		stage ('Deploy Frontend') {
+			steps {
+				dir ('frontend') {
+					git credentialsId: 'RepoPandora', url: 'https://github.com/pandorafighter/tasks-fronend'
+					bat 'mvn clean package'
+					deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://192.168.5.135:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+				}				
+			}
+		}
 	}
 }
-
