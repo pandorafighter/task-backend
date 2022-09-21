@@ -25,7 +25,7 @@ pipeline {
 		stage ('QualityGate') {
 			steps {
 				seep(5)
-				timeout(1, MINUTES) {
+				timeout(time:1, unit: 'MINUTES') {
 					waitForQualityGate abortPipeline: true
 				}
 			}
