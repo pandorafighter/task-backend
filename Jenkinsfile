@@ -44,5 +44,13 @@ pipeline {
 				}				
 			}
 		}
+		stage ('Fuctional Test') {
+			steps {
+				dir('functional-test') {
+					git credentialsId: 'RepoPandora', url: 'https://github.com/pandorafighter/tasks-functional-tests'
+					bat 'mvn test'
+				}
+			}
+		}
 	}
 }
