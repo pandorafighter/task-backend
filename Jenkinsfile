@@ -22,6 +22,14 @@ pipeline {
 				}
 			}
 		}
+		stage ('QualityGate') {
+			steps {
+				sleep(5)
+				timeout(time:1, unit: 'MINUTES') {
+					waitForQualityGate abortPipeline: true
+				}
+			}
+		}
 		stage ('Deploy Backend') {
 			steps {
 				deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://192.168.5.135:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
@@ -49,14 +57,6 @@ pipeline {
 				dir('functional-test') {
 					git credentialsId: 'RepoPandora', url: 'https://github.com/pandorafighter/tasks-functional-tests'
 					bat 'mvn test'
-				}
-			}
-		}
-		stage ('QualityGate') {
-			steps {
-				sleep(5)
-				timeout(time:1, unit: 'MINUTES') {
-					waitForQualityGate abortPipeline: true
 				}
 			}
 		}
