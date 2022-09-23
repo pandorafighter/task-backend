@@ -61,4 +61,10 @@ pipeline {
 			}
 		}
 	}
+	    post {
+        always {
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, fuctional-test/target/surefire-reports/*.xml, fuctional-test/target/failsafe-reports/*.xml'
+            archiveArtifacts:'target/tasks-backend.war, frontend/target/tasks.war', onlyIfSucessful:true
+        }
+    }
 }
