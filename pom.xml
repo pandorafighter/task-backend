@@ -72,18 +72,16 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<destFile>${sonar.jacoco.reportPath}</destFile>
-				</configuration>
-			</plugin>
+					<executions>
+						<execution>
+							<id>report</id>
+							<goals>
+								<goal>report-aggregate</goal>
+							</goals>
+							<phase>verify</phase>
+						</execution>
+					</executions>
+				</plugin>
 		</plugins>
 	</build>
 
