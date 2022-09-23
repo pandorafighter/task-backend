@@ -19,8 +19,10 @@
 	<properties>
 		<java.version>1.8</java.version>
 		    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		    <aggregate.report.dir>${project.basedir}/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
     		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     		<sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
+    		<sonar.coverage.jacoco.xmlReportPaths>${basedir}/${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths> 
     		<sonar.language>java</sonar.language>
 	</properties>
 
